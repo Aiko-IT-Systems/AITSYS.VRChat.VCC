@@ -1,0 +1,19 @@
+{
+  "name": "AITSYS VCC",
+  "id": "dev.aitsys.vcc",
+  "url": "https://vcc.aitsys.dev/index.json",
+  "author": {
+    "email": "aiko@aitsys.dev",
+    "name": "Lala Sabathil",
+    "url": "https://github.com/Lulalaby"
+  },
+  "description": "VRChat Creator Companion packages by AITSYS.",
+  "infoLink": {
+    "url": "https://github.com/Aiko-IT-Systems/AITSYS.VRChat.VCC",
+    "text": "View on GitHub"
+  },
+  "bannerUrl": "banner.png",
+  "githubRepos": [
+    "Aiko-IT-Systems/AITSYS.VRChat.DiscordRPC"
+  ]
+}

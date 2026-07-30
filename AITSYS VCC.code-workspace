@@ -1,0 +1,26 @@
+{
+	"folders": [
+		{
+			"name": "AITSYS.VRChat.VCC",
+			"path": "."
+		},
+		{
+			"name": "AITSYS.VRChat.DiscordRPC",
+			"path": "../AITSYS.VRChat.DiscordRPC"
+		}
+	],
+	"settings": {
+		"licenser.author": "Aiko IT Systems",
+		"licenser.license": "MIT",
+		"licenser.projectName": "AITSYS.VRChat.VCC",
+		"licenser.useSingleLineStyle": false,
+		"licenser.disableAutoHeaderInsertion": true,
+		"json.schemaDownload.enable": true,
+		"yaml.schemaStore.enable": true,
+		"files.eol": "\n",
+		"files.trimFinalNewlines": true,
+		"cSpell.language": "en,en-US",
+		"powershell.cwd": "AITSYS.VRChat.VCC",
+		"discord.enabled": false,
+	},
+}

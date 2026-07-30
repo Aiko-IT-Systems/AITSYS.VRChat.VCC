@@ -1,0 +1,67 @@
+name: Build Repo Listing
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - source.json
+      - Website/**
+      - .github/workflows/build-listing.yml
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  listPublishDirectory: Website
+  pathToCi: ci
+
+jobs:
+  build-listing:
+    name: Build listing
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout listing
+        uses: actions/checkout@v7.0.1
+
+      - name: Checkout listing builder
+        uses: actions/checkout@v7.0.1
+        with:
+          repository: vrchat-community/package-list-action
+          path: ${{ env.pathToCi }}
+          clean: false
+
+      - name: Restore cache
+        uses: actions/cache@v6.1.0
+        with:
+          path: |
+            ${{ env.pathToCi }}/.nuke/temp
+            ~/.nuget/packages
+          key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj') }}
+
+      - name: Build multi-package listing
+        run: ${{ env.pathToCi }}/build.cmd BuildMultiPackageListing --root ${{ env.pathToCi }} --list-publish-directory $GITHUB_WORKSPACE/${{ env.listPublishDirectory }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: ${{ env.listPublishDirectory }}
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
